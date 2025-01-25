@@ -1,6 +1,6 @@
-import DrawGrid from "./DrawGrid.js";
+import DrawGrid from "./model/DrawGrid.js";
 import Project from "./FileProject.js";
-import LocalStorage from "./LocalStorage.js";
+import LocalStorage from "./model/LocalStorage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("pixelCanvas");
@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentColor = "#000000";
   colorPicker.addEventListener("change", () => {
     console.log("ganti warna");
-    
+
     currentColor = colorPicker.value;
-  })
+  });
   const downloadButton = document.getElementById("downloadImage");
   const pixelStorage = new LocalStorage();
   const project = new Project(1, canvas);

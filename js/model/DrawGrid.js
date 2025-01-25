@@ -20,7 +20,7 @@ class DrawGrid {
 
   draw(cursor, color) {
     console.log(color);
-    
+
     const rect = this.canvas.getBoundingClientRect();
     const x =
       Math.floor((cursor.clientX - rect.left) / this.pixelSize) *
@@ -28,8 +28,7 @@ class DrawGrid {
     const y =
       Math.floor((cursor.clientY - rect.top) / this.pixelSize) * this.pixelSize;
 
-      this.ctx.draw(x, y, this.pixelSize, color)
-   
+    this.ctx.draw(x, y, this.pixelSize, color);
   }
 
   clear() {

@@ -36,3 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+import FileProject from "./FileProject.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("pixelCanvas");
+  const project = new FileProject(1, canvas);
+  console.log(project);
+
+});
+

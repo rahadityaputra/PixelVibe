@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Art Editor - Dashboard</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="root">
+      <main class="content">
+        <section class="main">
+          <header class="header">
+            <h2>Welcome to PixelVibe</h2>
+            <p>Create pixel-perfect art effortlessly!</p>
+          </header>
+          <nav class="menu">
+            <button class="btn" id="create-project">Create</button>
+            <a class="btn">About</a>
+          </nav>
+        </section>
+        <section class="jumbotron">
+          <div class="grid"></div>
+        </section>
+      </main>
+  
+      <div id="backdrop">
+        <form id="popupForm">
+          <h2>Create New Project</h2>
+          <label for="projectName">Project Name:</label>
+          <input
+            type="text"
+            id="projectName"
+            placeholder="Enter project name"
+            value="My Project "
+          />
+          <label for="gridWidth">Grid Width:</label>
+          <input
+            type="number"
+            id="gridWidth"
+            placeholder="Enter width"
+            min="1"
+            value="1000"
+          />
+          <label for="gridHeight">Grid Height:</label>
+          <input
+            type="number"
+            id="gridHeight"
+            placeholder="Enter height"
+            min="1"
+            value="1000"
+          />
+          <button type="submit" id="submit" class="btn">Create</button>
+          <button id="back" class="btn">Back</button>
+        </form>
+      </div>
+    </div>
+    
+    <script src="./home.js" type="module"></script>
+  </body>
+</html>

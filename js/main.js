@@ -1,49 +1,51 @@
-import LocalStorage from "./LocalStorage.js";
-import LovePattern from "./lovePattern.js";
+import LovePattern from "./model/LovePattern.js";
+import ProjectManager from "./model/ProjectManager.js";
+
+
+const backdrop = document.getElementById("backdrop");
+const content = document.querySelector(".content");
+
+const hidePopupForm = () => {
+  backdrop.style.display = "none";
+  content.classList.remove("blurActived");
+};
+
+const showPopupForm = () => {
+    backdrop.style.display = "block";
+    content.classList.add("blurActived");
+  }
+
+const createProject = (e) => {
+  e.preventDefault();
+  try {
+    const projectName = document.getElementById("projectName").value;
+    const height = document.getElementById("gridHeight").value;
+    const width = document.getElementById("gridWidth").value;
+    const projectManager = new ProjectManager();
+
+    projectManager.crateProject({
+      name: projectName,
+      width: width,
+      height: height,
+    });
+    
+    window.location.pathname = "/project.html";
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".grid");
-  const lovePattern = new LovePattern(grid);
+  const createProjectButton = document.getElementById("create-project");
+  const backButton = document.getElementById("back");
+  const createProjectForm = document.getElementById("popupForm");
+
+  const lovePattern = new LovePattern("grid");
   lovePattern.init();
   lovePattern.start();
 
-  const pixelStorage = new LocalStorage();
+  createProjectButton.addEventListener("click", showPopupForm);
 
-  const createProjectButton = document.getElementById("create-project");
-  //   const popupForm = document.getElementById("popupForm");
-  const backdrop = document.getElementById("backdrop");
-  const content = document.querySelector(".content");
-  createProjectButton.addEventListener("click", () => {
-    backdrop.style.display = "block";
-    content.classList.add("blurActived");
-  });
-
-  const createProjectForm = document.getElementById("popupForm");
-  createProjectForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    try {
-      const projectName = document.getElementById("projectName").value;
-      const height = document.getElementById("gridHeight").value;
-      const width = document.getElementById("gridWidth").value;
-      pixelStorage.addProject({
-        name: projectName,
-        width: width,
-        height: height,
-      });
-      window.location.pathname = "/project.html";
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  backButton.addEventListener("click", hidePopupForm);
+  createProjectForm.addEventListener("submit", createProject);
 });
-
-
-import FileProject from "./FileProject.js";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("pixelCanvas");
-  const project = new FileProject(1, canvas);
-  console.log(project);
-
-});
-

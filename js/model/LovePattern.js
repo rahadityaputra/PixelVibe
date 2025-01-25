@@ -1,6 +1,6 @@
 class LovePattern {
-  constructor(grid) {
-    this.grid = grid;
+  constructor(gridElementId) {
+    this.grid = document.getElementById(gridElementId);
     this.pattern = [
       383, 384, 385, 386, 387, 391, 392, 393, 394, 395, 361, 362, 363, 364, 365,
       366, 367, 369, 370, 371, 372, 373, 374, 375, 339, 340, 341, 342, 343, 344,

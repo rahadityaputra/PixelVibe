@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixel Art Editor - Dashboard</title>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./style/index.css" />
   </head>
   <body>
     <div class="root">
       <main class="content">
-        <section class="main">
+
+        <section class="jumbotron">
           <header class="header">
             <h2>Welcome to PixelVibe</h2>
             <p>Create pixel-perfect art effortlessly!</p>
@@ -19,9 +20,11 @@
             <a class="btn">About</a>
           </nav>
         </section>
-        <section class="jumbotron">
-          <div class="grid"></div>
+
+        <section class="grid-animation">
+          <div id="grid"></div>
         </section>
+
       </main>
   
       <div id="backdrop">
@@ -32,7 +35,7 @@
             type="text"
             id="projectName"
             placeholder="Enter project name"
-            value="My Project "
+            value="Project-1"
           />
           <label for="gridWidth">Grid Width:</label>
           <input
@@ -40,6 +43,7 @@
             id="gridWidth"
             placeholder="Enter width"
             min="1"
+            max="1000"
             value="1000"
           />
           <label for="gridHeight">Grid Height:</label>
@@ -48,10 +52,11 @@
             id="gridHeight"
             placeholder="Enter height"
             min="1"
+            max="1000"
             value="1000"
           />
           <button type="submit" id="submit" class="btn">Create</button>
-          <button id="back" class="btn">Back</button>
+          <button id="back" class="btn" type="button">Back</button>
         </form>
       </div>
     </div>

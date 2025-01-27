@@ -24,7 +24,9 @@ class LocalStorage {
     };
   }
 
-  addProject(config = { name: "", width: null, height: null }) {
+  addProject(
+    config = { title: "", description: "", width: null, height: null }
+  ) {
     this.load();
     let newId;
     if (this.data.projects.length == 0) {
@@ -32,8 +34,26 @@ class LocalStorage {
     } else {
       newId = this.data.projects[this.data.projects.length - 1].id + 1;
     }
-    this.data.projects.push({ ...config, id: newId });
+    const createdAt = new Date().toLocaleString(undefined, {
+      minute: "2-digit",
+      hour: "2-digit",
+      weekday: "long",
+      day: "numeric",
+      year: "numeric",
+      month: "long",
+    });
+
+    const coloredPoints = [];
+    const project = {
+      ...config,
+      id: newId,
+      createdAt,
+      lastUpdatedAt: createdAt,
+      coloredPoints,
+    };
+    this.data.projects.push(project);
     this.save();
+    return project;
   }
 
   save() {
@@ -41,17 +61,45 @@ class LocalStorage {
   }
 
   getProject(projectId) {
-    this.load();
-    let result;
-    const projects = this.data.projects;
+    const projects = this.getAllProjects();
+
     for (let i = 0; i < projects.length; i++) {
       if (projects[i].id == projectId) {
-        result = projects[i];
-        console.log(result);
+        const result = projects[i];
         return result;
       }
     }
+    return null;
   }
+
+  getAllProjects = () => {
+    this.load();
+    const result = this.data.projects;
+    return result;
+  };
+
+  saveProject = (projectId, coloredPoints) => {
+    const projects = this.getAllProjects();
+    let index;
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].id == projectId) {
+        index = i;
+        break;
+      }
+    }
+    projects[index].coloredPoints = coloredPoints;
+    projects[index].lastUpdatedAt = new Date().toLocaleString(undefined, {
+      minute: "2-digit",
+      hour: "2-digit",
+      weekday: "long",
+      day: "numeric",
+      year: "numeric",
+      month: "long",
+    });
+    this.data.projects = projects;
+
+    this.save();
+  };
 }
 
 export default LocalStorage;

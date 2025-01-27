@@ -12,20 +12,33 @@ class ProjectManager {
     return project;
   };
 
-  saveProject = () => {};
+  saveProject = (projectId, coloredPoints) => {
+    console.log(projectId);
+  
+    // const project = this.getProject(projectId);
+    // console.log(project);
+    // project.coloredPoints = coloredPoints;
+    this.#storage.saveProject(projectId, coloredPoints)
+  };
 
   downloadProject = () => {
     const dataURL = this.canvas.toDataURL("image/png", 1);
     // Buat elemen <a> untuk download
     const link = document.createElement("a");
     link.href = dataURL;
-    link.download = this.project.name + ".png"; // Nama file yang akan didownload
-    link.click(); // Klik otomatis untuk memulai download
+    link.download = this.project.title + ".png";
+    link.click();
   };
 
-  crateProject = ({ name, width, height }) => {
-    this.#storage.addProject({ name, width, height });
+  crateProject = ({ title, description, width, height }) => {
+    const project = this.#storage.addProject({ title, description,width, height });
+    return project;
   };
+
+  getAllProjects = () => {
+    const projects = this.#storage.getAllProjects();
+    return projects;
+  }
 
   init() {}
 }

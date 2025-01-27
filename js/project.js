@@ -1,105 +1,76 @@
-import DrawGrid from "./model/DrawGrid.js";
-import Project from "./FileProject.js";
-import LocalStorage from "./model/LocalStorage.js";
+import Canvas from "./model/Canvas.js";
+import ProjectManager from "./model/ProjectManager.js";
+import ToolBar from "./model/ToolBar.js";
+
+const getIdFromQuery = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get("id");
+  return id;
+};
+
+const showProjectCreatedAt = (createdAt) => {
+  const createdAtHeader = document.getElementById("created-at");
+  createdAtHeader.textContent = `Project created on: ${createdAt}`
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("pixelCanvas");
-  const colorPicker = document.getElementById("colorPicker");
+  const projectId = getIdFromQuery();
+  const projectManager = new ProjectManager();
+  const project = projectManager.getProject(projectId);
+  const canvas = new Canvas("pixel-canvas-wrapper", project.width, project.height, project.coloredPoints);
 
-  let currentColor = "#000000";
-  colorPicker.addEventListener("change", () => {
-    console.log("ganti warna");
+  const tools = [
+    {
+      name: "Color Palette",
+      icon: "palette-line",
+      action: () => {
+        console.log("ppp");
+      },
+    },
+    {
+      name: "Pencil",
+      icon: "pencil-line",
+      action: () => {
+        canvas.activeDrawingMode();
+      },
+    },
+    {
+      name: "Erase",
+      icon: "eraser-line",
+      action: () => {
+        canvas.activeEraseMode();
+      },
+    },
+    { name: "Undo", icon: "arrow-go-back-line", action: () => {} },
+    { name: "Redo", icon: "arrow-go-forward-line", action: () => {} },
+    {
+      name: "Clear",
+      icon: "restart-line",
+      action: () => {
+        canvas.clear();
+      },
+    },
+    {
+      name: "Download",
+      icon: "arrow-down-line",
+      action: () => {
+        projectManager.downloadProject();
+      },
+    },
+    {
+      name: "Save",
+      icon: "save-line",
+      action: () => {
+        const coloredPoints = canvas.getColoredPaints();
+        projectManager.saveProject(projectId, coloredPoints);
+      },
+    },
+  ];
 
-    currentColor = colorPicker.value;
-  });
-  const downloadButton = document.getElementById("downloadImage");
-  const pixelStorage = new LocalStorage();
-  const project = new Project(1, canvas);
-  const { name, width, height } = pixelStorage.getProject(1);
-  const drawGrid = new DrawGrid(canvas, width, 10);
-  drawGrid.init();
-
-  // Variabel untuk melacak status drag
-  let isDragging = false;
-
-  canvas.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    console.log("Mouse down at:", e.clientX, e.clientY);
-    drawGrid.draw(e, currentColor);
-  });
-
-  canvas.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-      console.log("Mouse dragging at:", e.clientX, e.clientY);
-      drawGrid.draw(e, currentColor);
-    }
-  });
-
-  canvas.addEventListener("mouseup", (e) => {
-    if (isDragging) {
-      console.log("Mouse up at:", e.clientX, e.clientY);
-      isDragging = false; // Menghentikan drag
-      drawGrid.draw(e, currentColor);
-    }
-  });
-
-  downloadButton.addEventListener("click", () => {
-    project.download();
-  });
+  const toolbar = new ToolBar("toolbar", tools, "toolbar");
+  toolbar.render();
+  canvas.render();
+  showProjectCreatedAt(project.createdAt);
 });
-
-// const clearCanvas = document.getElementById('clearCanvas');
-// const downloadImage = document.getElementById('downloadImage');
-// const popupForm = document.getElementById('popupForm');
-// const openForm = document.getElementById('openForm');
-// const createGrid = document.getElementById('createGrid');
-// const projectName = document.getElementById('projectName');
-// const gridWidth = document.getElementById('gridWidth');
-// const gridHeight = document.getElementById('gridHeight');
-
-// // Open popup form
-// openForm.addEventListener('click', () => {
-// });
-
-// // Create grid
-// createGrid.addEventListener('click', () => {
-//     const width = parseInt(gridWidth.value, 10);
-//     const height = parseInt(gridHeight.value, 10);
-//     if (!width || !height) {
-//         alert('Please enter valid dimensions.');
-//         return;
-//     }
-//     popupForm.style.display = 'none';
-//     createPixelGrid(width, height);
-// });
-
-// // Create pixel grid
-// function createPixelGrid(width, height) {
-//     pixelCanvas.innerHTML = '';
-//     pixelCanvas.style.gridTemplateColumns = `repeat(${width}, 20px)`;
-//     pixelCanvas.style.gridTemplateRows = `repeat(${height}, 20px)`;
-//     for (let i = 0; i < width * height; i++) {
-//         const pixel = document.createElement('div');
-//         pixel.className = 'pixel';
-//         pixel.addEventListener('click', () => {
-//             pixel.style.backgroundColor = colorPicker.value;
-//         });
-//         pixelCanvas.appendChild(pixel);
-//     }
-// }
-
-// // Clear canvas
-// clearCanvas.addEventListener('click', () => {
-//     const pixels = document.querySelectorAll('.pixel');
-//     pixels.forEach(pixel => pixel.style.backgroundColor = 'white');
-// });
-
-// // Download canvas as image
-// downloadImage.addEventListener('click', () => {
-//     html2canvas(pixelCanvas).then(canvas => {
-//         const link = document.createElement('a');
-//         link.download = `${projectName.value || 'pixel_art'}.png`;
-//         link.href = canvas.toDataURL();
-//         link.click();
-//     });
-// });

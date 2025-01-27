@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .timeline {
+  position: relative;
+  margin: 30px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.timeline-point {
+  width: 30px;
+  height: 30px;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+.timeline-content {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.timeline-item:hover .timeline-content {
+  transform: translateX(10px);
+  transition: transform 0.3s ease;
+}
+
+.continue-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-point">1</div>
+          <div class="timeline-content">
+            <h3>Proyek Desain 1</h3>
+            <p>Deskripsi proyek desain awal yang masih dalam pengembangan.</p>
+            <button class="continue-btn">Lanjutkan</button>
+          </div>
+        </div>
+      
+        <div class="timeline-item">
+          <div class="timeline-point">2</div>
+          <div class="timeline-content">
+            <h3>Proyek Desain 2</h3>
+            <p>Deskripsi proyek desain kedua yang hampir selesai.</p>
+            <button class="continue-btn">Lanjutkan</button>
+          </div>
+        </div>
+      
+        <!-- Add more timeline items here -->
+      </div>
+      
+</body>
+</html>

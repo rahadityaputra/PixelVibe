@@ -31,7 +31,7 @@ const createProject = (e) => {
       height: height,
     });
 
-    window.location.href = `/project.html?id=${project.id}`;
+    window.location.href = `/project?id=${project.id}`;
   } catch (error) {
     console.log(error);
   }

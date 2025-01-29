@@ -31,7 +31,7 @@ const createProject = (e) => {
       height: height,
     });
 
-    window.location.href = `/project/index.html?id=${project.id}`;
+    window.location.href = `./project/index.html?id=${project.id}`;
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +56,7 @@ const displayProjectHistories = () => {
                   <span class="project-date">Created At : ${project.createdAt}</span>
                   <span class="project-date">Last updated At : ${project.lastUpdatedAt}</span>
                   
-                  <a href="./project.html?id=${project.id}" class="continue-btn">Continue</a>
+                  <a href="./project/index.html?id=${project.id}" class="continue-btn">Continue</a>
                   <a href="./project.html?id=${project.id}" class="continue-btn">Hapus</a>
                   <a href="./project.html?id=${project.id}" class="continue-btn">Download</a>
                 </div>

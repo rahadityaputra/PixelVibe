@@ -39,6 +39,15 @@ class ToolBar {
       }
     }
   }
+  
+  setToolColor = (toolName, color) =>{
+    const tool = this.tools.find((tool) => tool.name === toolName);
+    console.log(tool);
+    if (tool) {
+      tool.setColor(color);
+    }
+    
+  }
 }
 
 export default ToolBar;

@@ -12,6 +12,8 @@ class Canvas {
   #pixelSize;
   #coloredPoints;
   #onDragEnd;
+  #drawColor;
+  #actionListener;
 
   constructor(containerId) {
     this.#container = document.getElementById(containerId);
@@ -20,6 +22,7 @@ class Canvas {
     this.#isDragging = false;
     this.#pixelSize = 10;
     this.#onDragEnd = null;
+    this.#drawColor = "#000000";
   }
 
   #setUpCanvas = (width, height) => {
@@ -80,22 +83,29 @@ class Canvas {
     this.#gridCtx.createGrid(this.#pixelSize);
   };
 
-  setOnDragEnd =(callback) => {
+  setOnDragEnd = (callback) => {
     this.#onDragEnd = callback;
-  }
+  };
 
   activeEraseMode = () => {
     console.log("haha");
     this.#ErasingModeActived = true;
     this.#DrawingModeActived = false;
+    this.#actionListener("erasing");
   };
 
+  setActionListener = (callback) => {
+    this.#actionListener = callback;
+  };
+
+  setDrawingColor = (color) => {
+    this.#drawColor = color;
+  };
   activeDrawingMode = () => {
     this.#ErasingModeActived = false;
     this.#DrawingModeActived = true;
+    this.#actionListener("drawing");
   };
-
-
 
   render = (coloredPoints) => {
     // console.log(coloredPoints);
@@ -109,7 +119,6 @@ class Canvas {
         this.#contentCtx.draw(x, y, color, this.#pixelSize);
       }
     }
-
   };
 
   draw = (cursor) => {
@@ -120,9 +129,8 @@ class Canvas {
     const y =
       Math.floor((cursor.clientY - rect.top) / this.#pixelSize) *
       this.#pixelSize;
-    this.#coloredPoints.push({ x, y, color: "#000000" });
-    this.#contentCtx.draw(x, y, "#000000", this.#pixelSize);
-
+    this.#coloredPoints.push({ x, y, color: this.#drawColor });
+    this.#contentCtx.draw(x, y, this.#drawColor, this.#pixelSize);
   };
 
   erase = (cursor) => {
@@ -139,13 +147,13 @@ class Canvas {
 
   clear = () => {
     console.log("clear bro");
-    
+
     this.#contentCtx.clear();
   };
 
   getContentCanvas = () => {
     return this.#contentCanvasElement;
-  }
+  };
 
   // getColoredPaints = () => {
   //   return this.#coloredPoints;

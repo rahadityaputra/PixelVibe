@@ -14,7 +14,6 @@ main {
   justify-content: center;
 }
 
-
 /* Header styling */
 header {
   text-align: center;
@@ -40,6 +39,7 @@ p {
   position: fixed;
   top: 120px;
   left: 20px;
+  z-index: 999999;
 }
 
 /* Toolbar styling */
@@ -65,7 +65,6 @@ p {
 
 #pixel-canvas-wrapper {
   margin-top: 100px;
-
 }
 /* Canvas Styling */
 #pixel-canvas {
@@ -75,7 +74,6 @@ p {
   display: block;
   /* margin: 0 auto; */
 }
-
 
 /* Grid styling (optional for later use) */
 input[type="checkbox"] {
@@ -101,7 +99,7 @@ input[type="checkbox"] {
 
 .tool:hover {
   transform: scale(1.1);
-  background-color: rgb(59, 230, 17);
+  background-color: rgb(225, 226, 224);
 }
 
 canvas {
@@ -114,9 +112,95 @@ canvas {
   height: 600px;
   overflow: auto;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
-
 
 .tool.disabled {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.open-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#palette-popup-wrapper {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: none;
+}
+
+.palette-popup {
+  position: fixed;
+  top: 250px;
+  left: 250px;
+  width: 200px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.palette {
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.color {
+  flex-basis: 30px;
+  /* width: 30px; */
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="color"] {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+#save-color {
+  padding: 8px;
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
 }

@@ -1,4 +1,5 @@
 import Canvas from "./model/Canvas.js";
+import ColorPalette from "./model/ColorPalette.js";
 import ProjectManager from "./model/ProjectManager.js";
 import ToolBar from "./model/ToolBar.js";
 import tools from "./model/tools.js";
@@ -22,12 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentProject = projectManager.getCurrentProject();
   const canvas = new Canvas("pixel-canvas-wrapper");
 
+  const colorPallete = new ColorPalette("palette-popup-wrapper");
+  colorPallete.render();
+  colorPallete.setActionClickChooseColorButton((color) => {
+    canvas.setDrawingColor(color);
+    toolbar.setToolColor("Color Palette", color);
+  });
+
   const tools = [
     {
       name: "Color Palette",
       icon: "palette-line",
       action: () => {
-        console.log("ppp");
+        colorPallete.show();
       },
     },
     {
@@ -48,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Undo",
       icon: "arrow-go-back-line",
       isDisable: true,
-      action: (enable, disable) => {
+      action: () => {
         currentProject.undo();
         canvas.clear();
         canvas.render(currentProject.coloredPoints);
@@ -87,15 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
   const toolbar = new ToolBar("toolbar", tools, "toolbar");
-
   toolbar.render();
-
+  toolbar.setToolColor("Color Palette", "#000000");
+  // toolbar.setToolColor("Pencil", "#007bff");
+  
   canvas.init(currentProject.width, currentProject.height);
   canvas.render(currentProject.coloredPoints);
   canvas.setOnDragEnd((newColoredPoints) => {
     currentProject.addHistory(newColoredPoints);
   });
-
+  
   currentProject.setActionListener((action) => {
     if (action === "addHistory") {
       toolbar.setToolState("Undo", "enable");
@@ -112,6 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
       toolbar.setToolState("Redo", "disable");
     }
   });
-
+  
+  canvas.setActionListener((action) => {
+    if (action == "drawing") {
+      toolbar.setToolColor("Pencil", "#007bff");
+      toolbar.setToolColor("Erase", "#ffffff");
+    } else if (action == "erasing") {
+      toolbar.setToolColor("Erase", "#007bff");
+      toolbar.setToolColor("Pencil", "#ffffff");
+    }
+  });
+  canvas.activeDrawingMode();
   showProjectCreatedAt(currentProject.createdAt);
 });

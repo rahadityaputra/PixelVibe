@@ -38,21 +38,28 @@ const createProject = (e) => {
 };
 
 const displayProjectHistories = () => {
+  
   const projectManager = new ProjectManager();
   const projects = projectManager.getAllProjects();
+  // console.log(projects);
+  
   const html = projects
     .map((project) => {
       console.log(project);
       
       return `<div class="project-item">
               <div class="project-info">
+                <img src="${project.URLData}" alt="" width="150">
                 <h3 class="project-title">${project.title}</h3>
-                <p class="project-desc">${project.description}</p>
                 <div class="project-details">
+                  <p class="project-desc">${project.description}</p>
                   <span class="project-date">Created At : ${project.createdAt}</span>
                   <span class="project-date">Last updated At : ${project.lastUpdatedAt}</span>
+                  
+                  <a href="./project.html?id=${project.id}" class="continue-btn">Continue</a>
+                  <a href="./project.html?id=${project.id}" class="continue-btn">Hapus</a>
+                  <a href="./project.html?id=${project.id}" class="continue-btn">Download</a>
                 </div>
-                <a href="./project.html?id=${project.id}" class="continue-btn">Lanjutkan</a>
               </div>
             </div>`;
     })

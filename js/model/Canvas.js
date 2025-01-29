@@ -9,17 +9,24 @@ class Canvas {
   #DrawingModeActived;
   #ErasingModeActived;
   #isDragging;
-  #coloredPoints;
   #pixelSize;
+  #coloredPoints;
+  #onDragEnd;
 
-  constructor(containerId, width, height, coloredPoints) {
+  constructor(containerId) {
     this.#container = document.getElementById(containerId);
-    this.#setUpCanvas(width, height);
     this.#DrawingModeActived = true;
     this.#ErasingModeActived = false;
     this.#isDragging = false;
-    this.#coloredPoints = coloredPoints || [];
     this.#pixelSize = 10;
+    this.#onDragEnd = null;
+  }
+
+  #setUpCanvas = (width, height) => {
+    this.#createCanvasElements(width, height);
+    this.#gridCtx = new Ctx(this.#gridCanvasElement, width, height);
+    this.#contentCtx = new Ctx(this.#contentCanvasElement, width, height);
+    // this.#contentCtx.globalCompositeOperation = "source-over";
 
     this.#contentCanvasElement.addEventListener("mousedown", (e) => {
       this.#isDragging = true;
@@ -45,32 +52,37 @@ class Canvas {
         this.#isDragging = false;
         if (this.#ErasingModeActived) {
           this.erase(e);
-          return;
+        } else {
+          this.draw(e);
         }
-        this.draw(e);
+
+        this.#onDragEnd(this.#coloredPoints);
       }
     });
-  }
+  };
 
-  #setUpCanvas = (width, height) => {
+  #createCanvasElements = (width, height) => {
     this.#gridCanvasElement = document.createElement("canvas");
     this.#contentCanvasElement = document.createElement("canvas");
-    this.#gridCanvasElement.style.position = "absolute";
-    this.#contentCanvasElement.style.position = "absolute";
-    // this.#contentCanvasElement.style.position = "relative";
-    this.#gridCanvasElement.style.zIndex = "-1";
-    // this.#container.style.position = "relative";
-    this.#container.appendChild(this.#gridCanvasElement);
-    this.#container.appendChild(this.#contentCanvasElement);
-    this.#gridCtx = new Ctx(this.#gridCanvasElement, width, height);
-    this.#contentCtx = new Ctx(this.#contentCanvasElement, width, height);
-    this.#contentCtx.globalCompositeOperation = "source-over";
     this.#gridCanvasElement.width = width;
     this.#gridCanvasElement.height = height;
-
     this.#contentCanvasElement.width = width;
     this.#contentCanvasElement.height = height;
+    this.#gridCanvasElement.style.position = "absolute";
+    this.#contentCanvasElement.style.position = "absolute";
+    this.#gridCanvasElement.style.zIndex = "-1";
+    this.#container.appendChild(this.#gridCanvasElement);
+    this.#container.appendChild(this.#contentCanvasElement);
   };
+
+  init = (width, height) => {
+    this.#setUpCanvas(width, height);
+    this.#gridCtx.createGrid(this.#pixelSize);
+  };
+
+  setOnDragEnd =(callback) => {
+    this.#onDragEnd = callback;
+  }
 
   activeEraseMode = () => {
     console.log("haha");
@@ -83,16 +95,21 @@ class Canvas {
     this.#DrawingModeActived = true;
   };
 
-  render = () => {
-    this.#gridCtx.createGrid(this.#pixelSize);
-    if (this.#coloredPoints.length != 0) {
-      for (let i = 0; i < this.#coloredPoints.length; i++) {
-        const x = this.#coloredPoints[i].x;
-        const y = this.#coloredPoints[i].y;
-        const color = this.#coloredPoints[i].color;
+
+
+  render = (coloredPoints) => {
+    // console.log(coloredPoints);
+
+    this.#coloredPoints = coloredPoints;
+    if (coloredPoints.length != 0) {
+      for (let i = 0; i < coloredPoints.length; i++) {
+        const x = coloredPoints[i].x;
+        const y = coloredPoints[i].y;
+        const color = coloredPoints[i].color;
         this.#contentCtx.draw(x, y, color, this.#pixelSize);
       }
     }
+
   };
 
   draw = (cursor) => {
@@ -103,14 +120,10 @@ class Canvas {
     const y =
       Math.floor((cursor.clientY - rect.top) / this.#pixelSize) *
       this.#pixelSize;
-
-      this.#coloredPoints.push({x, y, color : "#000000"})
-    //   console.log(this.#coloredPoints);
-      
+    this.#coloredPoints.push({ x, y, color: "#000000" });
     this.#contentCtx.draw(x, y, "#000000", this.#pixelSize);
+
   };
-
-
 
   erase = (cursor) => {
     console.log("erase ");
@@ -125,12 +138,18 @@ class Canvas {
   };
 
   clear = () => {
+    console.log("clear bro");
+    
     this.#contentCtx.clear();
   };
 
-  getColoredPaints = () => {
-    return this.#coloredPoints;
+  getContentCanvas = () => {
+    return this.#contentCanvasElement;
   }
+
+  // getColoredPaints = () => {
+  //   return this.#coloredPoints;
+  // };
 }
 
 export default Canvas;

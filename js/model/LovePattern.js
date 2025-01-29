@@ -41,7 +41,7 @@ class LovePattern {
     this.createPixel();
   }
 
-  draw() {
+  draw = () => {
     let delay = 0;
     this.pattern.forEach((number) => {
       const pixel = this.grid.querySelector(`.pixel[data-number="${number}"]`);
@@ -50,28 +50,29 @@ class LovePattern {
       }, delay);
       delay += 10;
     });
-  }
+  };
 
-  clear() {
+  clear = () => {
     let delay = 0;
     this.pattern.forEach((number) => {
       const pixel = this.grid.querySelector(`.pixel[data-number="${number}"]`);
-      console.log(pixel);
       setTimeout(() => {
         pixel.classList.remove("filled");
       }, delay);
       delay += 10;
     });
-  }
+  };
 
   // ini masih salah
-  start() {
+  start = async () => {
     this.draw();
-    // setInterval(() => {
-    //     this.clear();
-    //     this.draw();
-    // }, 6000);
-  }
+    setInterval(() => {
+      this.clear();
+      setTimeout(() => {
+        this.draw();
+      }, 4000);
+    }, 7000);
+  };
 }
 
 export default LovePattern;

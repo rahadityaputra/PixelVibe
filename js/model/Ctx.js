@@ -22,8 +22,6 @@ class Ctx {
 
   createGrid = (pixelSize) => {
     this.#ctx.strokeStyle = "#ddd";
-    console.log("create grid");
-    console.log(this.width);
 
     for (let x = 0; x < this.width; x += pixelSize) {
       this.#ctx.beginPath();
@@ -31,8 +29,7 @@ class Ctx {
       this.#ctx.lineTo(x, this.width);
       this.#ctx.stroke();
       this.#ctx.beginPath();
-      console.log("o");
-
+      
       this.#ctx.moveTo(0, x);
       this.#ctx.lineTo(this.width, x);
       this.#ctx.stroke();

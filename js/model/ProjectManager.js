@@ -1,34 +1,51 @@
 import LocalStorage from "./LocalStorage.js";
+import Project from "./Project.js";
 
 class ProjectManager {
   #storage;
+  #currentProject;
+  
 
   constructor() {
     this.#storage = new LocalStorage();
+    this.#currentProject = undefined;
   }
+
+  setCurrentProject = (projectId) => {
+    const project = this.getProject(projectId);
+    this.#currentProject = new Project(project);
+  }
+
+  getCurrentProject = () => {
+    return this.#currentProject;
+  }
+
 
   getProject = (projectId) => {
     const project = this.#storage.getProject(projectId);
     return project;
   };
 
-  saveProject = (projectId, coloredPoints) => {
-    console.log(projectId);
-  
-    // const project = this.getProject(projectId);
-    // console.log(project);
-    // project.coloredPoints = coloredPoints;
-    this.#storage.saveProject(projectId, coloredPoints)
+  saveCurrentProject = (contentCanvas) => {
+    const URLData = this.createURL(contentCanvas)
+    const coloredPoints = this.#currentProject.save();
+    this.#storage.saveProject(this.#currentProject.id, coloredPoints, URLData)
   };
 
-  downloadProject = () => {
-    const dataURL = this.canvas.toDataURL("image/png", 1);
+  downloadCurrentProject = (contentCanvas) => {
+    const dataURL = this.createURL(contentCanvas);
     // Buat elemen <a> untuk download
     const link = document.createElement("a");
     link.href = dataURL;
-    link.download = this.project.title + ".png";
+    link.download = this.#currentProject.title + ".png";
     link.click();
   };
+  
+  createURL = (contentCanvas) => {
+    const dataURL = contentCanvas.toDataURL("image/png", 1);
+    return dataURL;
+
+  }
 
   crateProject = ({ title, description, width, height }) => {
     const project = this.#storage.addProject({ title, description,width, height });

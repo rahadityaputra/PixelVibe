@@ -1,7 +1,6 @@
 class LocalStorage {
   constructor() {
     this.storage = window.localStorage;
-    console.log(this.storage);
     this.storageName = "PixelVibe";
     this.data = null;
   }
@@ -78,7 +77,7 @@ class LocalStorage {
     return result;
   };
 
-  saveProject = (projectId, coloredPoints) => {
+  saveProject = (projectId, coloredPoints, URLData) => {
     const projects = this.getAllProjects();
     let index;
     for (let i = 0; i < projects.length; i++) {
@@ -87,7 +86,9 @@ class LocalStorage {
         break;
       }
     }
+
     projects[index].coloredPoints = coloredPoints;
+    projects[index].URLData = URLData;
     projects[index].lastUpdatedAt = new Date().toLocaleString(undefined, {
       minute: "2-digit",
       hour: "2-digit",
@@ -97,7 +98,6 @@ class LocalStorage {
       month: "long",
     });
     this.data.projects = projects;
-
     this.save();
   };
 }

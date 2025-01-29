@@ -115,3 +115,8 @@ canvas {
   overflow: auto;
   position: relative;
 }
+
+
+.tool.disabled {
+  background-color: rgba(0, 0, 0, 0.2);
+}

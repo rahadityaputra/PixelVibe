@@ -342,13 +342,13 @@ footer {
   gap: 15px;
 }
 
-.social-icon img {
+.social-icon svg {
   width: 30px;
   height: 30px;
   transition: transform 0.3s ease;
 }
 
-.social-icon img:hover {
+.social-icon svg:hover {
   transform: scale(1.2);
   filter: brightness(0.8);
 }

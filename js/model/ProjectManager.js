@@ -57,7 +57,9 @@ class ProjectManager {
     return projects;
   }
 
-  init() {}
+  deleteProjects = (projectId) => {
+    this.#storage.deleteProject(projectId);
+  }
 }
 
 export default ProjectManager;

@@ -100,6 +100,24 @@ class LocalStorage {
     this.data.projects = projects;
     this.save();
   };
+
+  deleteProject = (projectId) => {
+    console.log("p");
+
+    const projects = this.getAllProjects();
+    let deletedIndex;
+
+    for (let i = 0; i < projects.length; i++) {
+      if (projectId === projects[i]) {
+        deletedIndex = i;
+        return;
+      }
+    }
+    
+    projects.splice(deletedIndex, 1);
+    this.data.projects = projects;
+    this.save();
+  };
 }
 
 export default LocalStorage;

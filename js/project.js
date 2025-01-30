@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const toolbar = new ToolBar("toolbar", tools, "toolbar");
   toolbar.render();
   toolbar.setToolColor("Color Palette", "#000000");
-  // toolbar.setToolColor("Pencil", "#007bff");
   
   canvas.init(currentProject.width, currentProject.height);
   canvas.render(currentProject.coloredPoints);
@@ -134,3 +133,4 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.activeDrawingMode();
   showProjectCreatedAt(currentProject.createdAt);
 });
+

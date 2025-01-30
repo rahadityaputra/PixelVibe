@@ -29,7 +29,6 @@ class ToolBar {
 
   setToolState = (toolName, state) => {
     const tool = this.tools.find((tool) => tool.name === toolName);
-    console.log(tool);
     
     if (tool) {
       if(state === "enable") {
@@ -42,7 +41,6 @@ class ToolBar {
   
   setToolColor = (toolName, color) =>{
     const tool = this.tools.find((tool) => tool.name === toolName);
-    console.log(tool);
     if (tool) {
       tool.setColor(color);
     }

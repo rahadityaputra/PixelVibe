@@ -103,10 +103,7 @@ const displayProjectHistories = () => {
       projectList.classList.add("project-list");
       projectList.innerHTML = html;
       historyProject.appendChild(projectList);
-    }
-    
-    // projectList.innerHTML = "";
-  projectList.innerHTML = html;
+    }    
 };
 
 document.addEventListener("DOMContentLoaded", () => {

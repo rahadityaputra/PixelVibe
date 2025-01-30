@@ -106,6 +106,7 @@ const displayProjectHistories = () => {
     }    
 };
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const createProjectButton = document.getElementById("create-project");
   const backButton = document.getElementById("back");

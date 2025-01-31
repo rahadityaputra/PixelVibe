@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  user-select: none;
+}
+
 #pixel-canvas {
   image-rendering: pixelated;
 }
@@ -142,6 +146,7 @@ p {
 canvas {
   border: 1px solid #ccc;
   cursor: crosshair;
+  user-select: none;
 }
 
 #pixel-canvas-wrapper {

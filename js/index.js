@@ -1,5 +1,4 @@
 import LovePattern from "./model/LovePattern.js";
-import CarouselProject from "./model/ProjectHistories.js";
 import ProjectManager from "./model/ProjectManager.js";
 
 const backdrop = document.getElementById("backdrop");
@@ -60,14 +59,13 @@ const displayProjectHistories = () => {
   contentHistoryProject.innerHTML = "";
 
   let html;
+  const emptyMessage = document.querySelector(".empty-message");
   if (projects.length == 0) {
-    const emptyMessage = document.querySelector(".empty-message");
     emptyMessage.style.display = "block";
   } else {
+    emptyMessage.style.display = "none";
     html = projects
       .map((project) => {
-        console.log(project);
-
         return `<div class="project-item">
               <div class="project-info">
                 <div class="snapshot"  style="background-image: url('${project.URLData}'); background-size: cover; backgourd-position: top;">
@@ -107,7 +105,7 @@ const displayProjectHistories = () => {
       .join("");
     const projectList = document.createElement("div");
     projectList.classList.add("project-list");
-    projectList.innerHTML = html + html + html;
+    projectList.innerHTML = html;
     contentHistoryProject.append(projectList);
   }
 };

@@ -105,9 +105,6 @@ const displayProjectHistories = () => {
             </div>`;
       })
       .join("");
-
-    console.log(html);
-
     const projectList = document.createElement("div");
     projectList.classList.add("project-list");
     projectList.innerHTML = html + html + html;

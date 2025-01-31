@@ -29,7 +29,6 @@ class Canvas {
     this.#createCanvasElements(width, height);
     this.#gridCtx = new Ctx(this.#gridCanvasElement, width, height);
     this.#contentCtx = new Ctx(this.#contentCanvasElement, width, height);
-    // this.#contentCtx.globalCompositeOperation = "source-over";
 
     this.#contentCanvasElement.addEventListener("mousedown", (e) => {
       this.#isDragging = true;
@@ -51,6 +50,40 @@ class Canvas {
     });
 
     this.#contentCanvasElement.addEventListener("mouseup", (e) => {
+      if (this.#isDragging) {
+        this.#isDragging = false;
+        if (this.#ErasingModeActived) {
+          this.erase(e);
+        } else {
+          this.draw(e);
+        }
+
+        this.#onDragEnd(this.#coloredPoints);
+      }
+    });
+
+    this.#contentCanvasElement.addEventListener("touchstart", (e) => {
+      this.#isDragging = true;
+      if (this.#ErasingModeActived) {
+        this.erase(e);
+        return;
+      }
+      this.draw(e);
+    });
+
+    this.#contentCanvasElement.addEventListener("touchmove", (e) => {
+      
+      if (this.#isDragging) {
+        
+        if (this.#ErasingModeActived) {
+          this.erase(e);
+          return;
+        }
+        this.draw(e);
+      }
+    });
+
+    this.#contentCanvasElement.addEventListener("touchend", (e) => {
       if (this.#isDragging) {
         this.#isDragging = false;
         if (this.#ErasingModeActived) {

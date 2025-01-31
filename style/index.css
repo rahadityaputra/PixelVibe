@@ -1,65 +1,73 @@
-/* Reset Dasar */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-main {
-  /* background-color: rgb(170, 243, 0); */
-  /* display: grid; */
-  /* grid-template-areas: "jumbroton animated-pixel" "history history"; */
-  /* padding: 20px; */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+body {
+  font-family: "Inter", sans-serif;
 }
 
-.menu {
+.jumbotron {
+  height: 100vh;
+  background-color: #1e3a8a;
+  color: white;
+  grid-area: jumbroton;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumbotron .logo {
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.jumbotron h1 {
+  font-size: 48px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.jumbotron p {
+  font-size: 18px;
+  margin: 10px 0 20px;
+}
+
+.jumbotron .buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
 }
 
 .btn {
-  text-decoration: none;
-  color: #f3dede;
+  background-color: #facc15;
+  color: #222;
+  padding: 10px 20px;
   border: none;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  text-align: center;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  background-color: rgb(232, 111, 11);
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .btn:hover {
-  transform: scale(1.07);
-  background-color: rgb(255, 115, 0);
-  color: #ffffff;
+  background-color: #eab308;
+  transform: translateY(-5px);
 }
 
 .blurActived {
   filter: blur(2px);
 }
 
-.grid-animation {
-  grid-area: "animated-pixel";
-  text-align: center;
-}
-
-.grid-animation h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.grid-animation p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-/* Grid untuk Pixel Art */
 #grid {
   padding: 10px;
   width: 500px;
@@ -67,7 +75,6 @@ main {
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   gap: 2px;
-  /* justify-content: center; */
 }
 
 .pixel {
@@ -81,117 +88,10 @@ main {
   background-color: blue;
 }
 
-.jumbotron {
-  height: 100vh;
-  background-color: rgb(103, 158, 246);
-  grid-area: jumbroton;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header h2 {
-  font-size: 2.1rem;
-  color: white;
-}
-
-#backdrop {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: 1s;
-}
-
-#popupForm {
-  z-index: 100;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#popupForm h2 {
-  margin-top: 0;
-}
-
-#popupForm label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-#popupForm input {
-  margin-bottom: 15px;
-  padding: 8px;
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.7);
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-#popupForm button {
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-#submit {
-  background-color: black;
-  color: white;
-}
-
-#submit:hover {
-  background-color: rgb(156, 113, 113);
-}
-
-input[type="color"] {
-  margin-right: 10px;
-}
-
-@media screen and (max-width: 600px) {
-  main {
-    flex-direction: column;
-  }
-
-  .header {
-    font-size: 1.3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #grid {
-    display: grid;
-    grid-template-columns: repeat(21, 7px);
-    gap: 1px;
-    justify-content: center;
-  }
-}
-
-/* history projects */
 
 #history-projects {
   background-color: rgb(81, 255, 0);
   margin-top: 70px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .empty-project {
@@ -205,10 +105,14 @@ input[type="color"] {
   padding: 20px;
 }
 
-#project-list {
+#history-projects .content {
+  width: 80%;
+}
+
+.project-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 10px;
   margin: 30px;
   padding: 20px;
   width: 100%;
@@ -220,15 +124,12 @@ input[type="color"] {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  width: 200px;
   flex-direction: column;
   height: 250px;
-  /* transition: all 1s ease; */
 }
 
 .project-info {
   height: 100%;
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,40 +167,23 @@ input[type="color"] {
   color: #666;
 }
 
-@keyframes expandDetail {
-  0% {
-    opacity: 0;
-    max-height: 0;
-  }
-
-  100% {
-    max-height: 200px;
-  }
-}
-
-@keyframes closeDetail {
-  0% {
-    opacity: 1;
-    max-height: 200px;
-  }
-
-  100% {
-    opacity: 0;
-    max-height: 0;
-  }
-}
-
 .project-date {
   font-size: 10px;
   color: #aaa;
   margin-top: 10px;
 }
 
-.project-item .menu .btn {
+.project-item .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.project-item .buttons .btn {
   font-size: 0.6rem;
   display: block;
   color: white;
-  padding: 10px;
+  padding: 5px;
   margin-top: 10px;
   background-color: #007bff;
   cursor: pointer;
@@ -353,9 +237,131 @@ footer {
   filter: brightness(0.8);
 }
 
-/* Copyright */
 .footer-copy {
   font-size: 0.8rem;
   margin-top: 10px;
   color: #888;
+}
+
+
+#backdrop,
+#backdrop-popup-delete {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: 1s;
+}
+
+#popup-delete {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#popupForm {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #222;
+}
+
+#popupForm h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+#popupForm label {
+  font-size: 14px;
+  text-align: left;
+}
+#popupForm input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+#popupForm .btn {
+  margin-top: 10px;
+}
+
+#submit {
+  background-color: black;
+  color: white;
+}
+
+#submit:hover {
+  background-color: rgb(156, 113, 113);
+}
+
+input[type="color"] {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    flex-direction: column;
+  }
+
+  .jumbotron {
+    padding: 10px;
+    align-items: start;
+  }
+
+  .jumbotron .logo {
+    text-align: start;
+    font-size: 1rem;
+  }
+
+  .jumbotron h1 {
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+
+  .jumbotron p {
+    font-size: 0.8rem;
+  }
+
+  #grid {
+    padding: 10px;
+    width: 200px;
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: repeat(21, 1fr);
+    gap: 1px;
+  }
+  
+  .pixel {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    transition: background-color 0.5s;
+  }
+  
 }

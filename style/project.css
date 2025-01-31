@@ -204,3 +204,28 @@ input[type="color"] {
   border-radius: 5px;
   margin-top: 10px;
 }
+
+
+.success-save-alert {
+  /* display:; */
+  display: "none";
+  /* justify-content: center; */
+  text-align: center;
+  background-color: greenyellow;
+  padding: 10px;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 100px;
+  width: 300px;
+  transition: .5s ease-in;
+  opacity: 0;
+}
+
+.success-save-alert p {
+  color: black;
+}
+
+.success-save-alert.show {
+  display: block;
+  opacity: 1;
+}

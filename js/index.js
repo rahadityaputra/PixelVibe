@@ -39,9 +39,9 @@ const handleCreateProject = (e) => {
 };
 const projectManager = new ProjectManager();
 
-const handleDeleteProject = (e) => {
-  const projectId = e.target.dataset.projectId;
+const handleDeleteProject = (projectId) => {
   projectManager.deleteProjects(projectId);
+  displayProjectHistories();
 };
 
 const handleDownloadProjectImage = (e) => {
@@ -56,20 +56,16 @@ const handleDownloadProjectImage = (e) => {
 const displayProjectHistories = () => {
   const projects = projectManager.getAllProjects();
   const historyProject = document.getElementById("history-projects");
-  // console.log(projects);
+  const contentHistoryProject = historyProject.querySelector(".content");
+  contentHistoryProject.innerHTML = "";
+
   let html;
   if (projects.length == 0) {
     html = `
     <div class="empty-project">
       <h4>You haven't created any projects yet.</h4>
     </div>`;
-
-    const emptyProject = document.createElement("div");
-    emptyProject.classList.add("empty-project");
-    emptyProject.innerHTML = html;
-
-
-    historyProject.appendChild(emptyProject);
+    contentHistoryProject.innerHTML = html;
   } else {
     html = projects
       .map((project) => {
@@ -84,7 +80,7 @@ const displayProjectHistories = () => {
                 <div class="project-details">
                   <p class="project-desc">${project.description}</p>
                 </div>
-                <div class="menu">
+                <div class="buttons">
                   <a href="./project/index.html?id=${project.id}" class="btn continue-btn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                   </a>
@@ -99,13 +95,15 @@ const displayProjectHistories = () => {
             </div>`;
       })
       .join("");
-      const projectList = document.createElement("div");
-      projectList.classList.add("project-list");
-      projectList.innerHTML = html;
-      historyProject.appendChild(projectList);
-    }    
-};
 
+    console.log(html);
+
+    const projectList = document.createElement("div");
+    projectList.classList.add("project-list");
+    projectList.innerHTML = html;
+    contentHistoryProject.append(projectList);
+  }
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const createProjectButton = document.getElementById("create-project");
@@ -116,8 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
   lovePattern.init();
   lovePattern.start();
   displayProjectHistories();
-  // const carouselProjects = new CarouselProject("carousel-project");
-  // carouselProjects.loadProjects();
   createProjectButton.addEventListener("click", showPopupForm);
 
   backButton.addEventListener("click", hidePopupForm);
@@ -126,15 +122,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const historyProject = document.getElementById("history-projects");
 
+const handleShowPopupDeleteProject = (projectId) => {
+  const backdropPopupDelete = document.getElementById("backdrop-popup-delete");
+  backdropPopupDelete.style.display = "block";
+  const deleteConfirmationButton = document.getElementById(
+    "delete-confirmation"
+  );
+  deleteConfirmationButton.dataset.projectId = projectId;
+};
+
+const handleHidePopupDeleteProject = () => {
+  const backdropPopupDelete = document.getElementById("backdrop-popup-delete");
+  backdropPopupDelete.style.display = "none";
+};
+
+const deleteConfirmationButton = document.getElementById("delete-confirmation");
+deleteConfirmationButton.addEventListener("click", () => {
+  const projectId = deleteConfirmationButton.dataset.projectId;
+  handleDeleteProject(projectId);
+  handleHidePopupDeleteProject();
+});
+
 historyProject.addEventListener("click", (e) => {
   const element = e.target;
   if (element.classList.contains("delete-btn")) {
-    console.log("hapus bang");
-    handleDeleteProject(e);
-    displayProjectHistories();
+    const projectId = e.target.dataset.projectId;
+    handleShowPopupDeleteProject(projectId);
   } else if (element.classList.contains("download-btn")) {
-    console.log("download bang");
-
     handleDownloadProjectImage(e);
   }
 });

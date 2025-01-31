@@ -16,6 +16,15 @@ const showProjectCreatedAt = (createdAt) => {
   createdAtHeader.textContent = `Project created on: ${createdAt}`;
 };
 
+const showSuccessSaveAlert = () => {
+  const successSaveAlert = document.querySelector(".success-save-alert");
+  successSaveAlert.classList.add("show");
+
+  setTimeout(() => {
+    successSaveAlert.classList.remove("show");
+  }, 1500);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const projectId = getIdFromQuery();
   const projectManager = new ProjectManager();
@@ -90,20 +99,25 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Save",
       icon: "save-line",
       action: () => {
-        projectManager.saveCurrentProject(canvas.getContentCanvas());
+        try {
+          projectManager.saveCurrentProject(canvas.getContentCanvas());
+        } catch (error) {
+        } finally {
+          showSuccessSaveAlert();
+        }
       },
     },
   ];
   const toolbar = new ToolBar("toolbar", tools, "toolbar");
   toolbar.render();
   toolbar.setToolColor("Color Palette", "#000000");
-  
+
   canvas.init(currentProject.width, currentProject.height);
   canvas.render(currentProject.coloredPoints);
   canvas.setOnDragEnd((newColoredPoints) => {
     currentProject.addHistory(newColoredPoints);
   });
-  
+
   currentProject.setActionListener((action) => {
     if (action === "addHistory") {
       toolbar.setToolState("Undo", "enable");
@@ -120,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       toolbar.setToolState("Redo", "disable");
     }
   });
-  
+
   canvas.setActionListener((action) => {
     if (action == "drawing") {
       toolbar.setToolColor("Pencil", "#007bff");
@@ -133,4 +147,3 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.activeDrawingMode();
   showProjectCreatedAt(currentProject.createdAt);
 });
-

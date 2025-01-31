@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixel Vibe</title>
     <link rel="stylesheet" href="./style/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="root">
       <main class="content">
         <section class="jumbotron">
-          <header class="header">
-            <h2>Welcome to PixelVibe</h2>
-            <p>Create pixel-perfect art effortlessly!</p>
-          </header>
-          <nav class="menu">
-            <button class="btn" id="create-project">Create</button>
-            <a class="btn">About</a>
-          </nav>
+          <div class="logo">Pixel Vibe</div>
+          <h1>Create with Joy, Showcase with Pride!</h1>
+          <p>Feel the satisfaction of creating and proudly display your pixel art.</p>
+          <div class="buttons">
+              <button class="btn" id="create-project">Create</button>
+              <button class="btn">Explore My Gallery</button>
+          </div>
         </section>
-
+        
         <section class="grid-animation">
           <div id="grid"></div>
           <div class="palette-color"></div>
@@ -29,23 +29,25 @@
           <div class="header">
             <h2>Your Projects History</h3>
           </div>
+
+          <div class="content"></div>
         </section>
       </main>
   
       <div id="backdrop">
         <form id="popupForm">
           <h2>Create New Project</h2>
-          <label for="projectTitle">Project Name:</label>
+          <label for="projectTitle">Ttile:</label>
           <input
-            type="text"
-            id="projectTitle"
-            placeholder="Enter project name"
-            value="Project-1"
+          type="text"
+          id="projectTitle"
+          placeholder="Enter the title"
           />
+          <label for="projectTitle">Description:</label>
           <input
             type="text"
             id="projectDescription"
-            placeholder="Enter project description"
+            placeholder="Enter the description"
           />
           <label for="gridWidth">Grid Width:</label>
           <input
@@ -71,6 +73,17 @@
       </div>
     </div>
 
+
+    <div id="backdrop-popup-delete">
+      <div id="popup-delete">
+        <h3>Apakah kamu yakin ingin menghapus ?</h3>
+        <div class="menu">
+          <button>Cancel</button>
+          <button id="delete-confirmation">Delete</button>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="footer-container">
         <div class="footer-logo">
@@ -87,7 +100,7 @@
           </a>
         </div>
     
-        <p class="footer-copy">© 2024 Pixel Vibe. All Rights Reserved.</p>
+        <p class="footer-copy">© 202 Pixel Vibe. All Rights Reserved.</p>
       </div>
     </footer>
     

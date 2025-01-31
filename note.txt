@@ -1,6 +1,0 @@
-1. animasi di halaman home masih belum oke 
-2. responsive belum diterapkan
-3. menambahkan icon pada tombol tombol
-
-
-4. mencatat history drawing ketika user melepaskan klik mouse (mouse up)

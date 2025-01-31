@@ -20,16 +20,15 @@
           </div>
         </section>
         
+
         <section class="grid-animation">
           <div id="grid"></div>
           <div class="palette-color"></div>
         </section>
 
         <section id="history-projects">
-          <div class="header">
-            <h2>Your Projects History</h3>
-          </div>
-
+          <h2>Your Projects History</h3>
+          <p id="emptyMessage" class="empty-message" style="display: none;">No projects available. Start creating your first pixel art!</p>
           <div class="content"></div>
         </section>
       </main>
@@ -42,12 +41,14 @@
           type="text"
           id="projectTitle"
           placeholder="Enter the title"
+          required
           />
           <label for="projectTitle">Description:</label>
           <input
             type="text"
             id="projectDescription"
             placeholder="Enter the description"
+            required
           />
           <label for="gridWidth">Grid Width:</label>
           <input
@@ -55,8 +56,9 @@
             id="gridWidth"
             placeholder="Enter width"
             min="1"
-            max="1000"
-            value="1000"
+            max="500"
+            value="500"
+            required
           />
           <label for="gridHeight">Grid Height:</label>
           <input
@@ -64,8 +66,9 @@
             id="gridHeight"
             placeholder="Enter height"
             min="1"
-            max="1000"
-            value="1000"
+            max="500"
+            value="500"
+            required
           />
           <button type="submit" id="submit" class="btn">Create</button>
           <button id="back" class="btn" type="button">Back</button>

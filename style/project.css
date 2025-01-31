@@ -207,9 +207,7 @@ input[type="color"] {
 
 
 .success-save-alert {
-  /* display:; */
-  display: "none";
-  /* justify-content: center; */
+  display: none;
   text-align: center;
   background-color: greenyellow;
   padding: 10px;
@@ -227,5 +225,5 @@ input[type="color"] {
 
 .success-save-alert.show {
   display: block;
-  opacity: 1;
+  opacity: 1;;
 }

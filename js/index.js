@@ -73,22 +73,35 @@ const displayProjectHistories = () => {
 
         return `<div class="project-item">
               <div class="project-info">
-                <div class="snapshot">
-                  <img src="${project.URLData}" alt="" width="150">
+                <div class="snapshot"  style="background-image: url('${project.URLData}'); background-size: cover; backgourd-position: top;">
                 </div>        
-                <h3 class="project-title">${project.title}</h3>
                 <div class="project-details">
+                  <h3 class="project-title">${project.title}</h3>
                   <p class="project-desc">${project.description}</p>
+                  <p>Created: ${project.createdAt}</p>
+                  <p>Updated: ${project.lastUpdatedAt}</p>
                 </div>
                 <div class="buttons">
-                  <a href="./project/index.html?id=${project.id}" class="btn continue-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                
+                
+                <a href="./project/index.html?id=${project.id}" class="btn continue-btn">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                    </span>
+                    Edit
                   </a>
                   <button class="btn delete-btn" data-project-id="${project.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    </span>
+                    Delete
+
                   </button>
                   <button class="btn download-btn" data-project-image-url="${project.URLData}" data-project-title="${project.title}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    </span>
+                    Download
                   </button>
                 </div>
               </div>
@@ -100,7 +113,7 @@ const displayProjectHistories = () => {
 
     const projectList = document.createElement("div");
     projectList.classList.add("project-list");
-    projectList.innerHTML = html;
+    projectList.innerHTML = html + html + html;
     contentHistoryProject.append(projectList);
   }
 };

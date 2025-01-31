@@ -61,11 +61,8 @@ const displayProjectHistories = () => {
 
   let html;
   if (projects.length == 0) {
-    html = `
-    <div class="empty-project">
-      <h4>You haven't created any projects yet.</h4>
-    </div>`;
-    contentHistoryProject.innerHTML = html;
+    const emptyMessage = document.querySelector(".empty-message");
+    emptyMessage.style.display = "block";
   } else {
     html = projects
       .map((project) => {

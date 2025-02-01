@@ -63,23 +63,22 @@ class Canvas {
     });
 
     this.#contentCanvasElement.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.#isDragging = true;
       if (this.#ErasingModeActived) {
-        this.erase(e);
+        this.erase(e.changedTouches[0]);
         return;
       }
-      this.draw(e);
+      this.draw(e.changedTouches[0]);
     });
 
     this.#contentCanvasElement.addEventListener("touchmove", (e) => {
-      
       if (this.#isDragging) {
-        
         if (this.#ErasingModeActived) {
-          this.erase(e);
+          this.erase(e.changedTouches[0]);
           return;
         }
-        this.draw(e);
+        this.draw(e.changedTouches[0]);
       }
     });
 
@@ -87,9 +86,9 @@ class Canvas {
       if (this.#isDragging) {
         this.#isDragging = false;
         if (this.#ErasingModeActived) {
-          this.erase(e);
+          this.erase(e.changedTouches[0]);
         } else {
-          this.draw(e);
+          this.draw(e.changedTouches[0]);
         }
 
         this.#onDragEnd(this.#coloredPoints);
@@ -162,6 +161,7 @@ class Canvas {
     const y =
       Math.floor((cursor.clientY - rect.top) / this.#pixelSize) *
       this.#pixelSize;
+
     this.#coloredPoints.push({ x, y, color: this.#drawColor });
     this.#contentCtx.draw(x, y, this.#drawColor, this.#pixelSize);
   };

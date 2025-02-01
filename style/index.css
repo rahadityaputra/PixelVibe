@@ -68,6 +68,11 @@ body {
   filter: blur(2px);
 }
 
+.grid-animation {
+  display: flex;
+  justify-content: center;
+}
+
 #grid {
   padding: 10px;
   width: 500px;
@@ -76,6 +81,7 @@ body {
   grid-template-columns: repeat(21, 1fr);
   gap: 2px;
 }
+
 
 .pixel {
   width: 20px;
@@ -282,12 +288,27 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 300px;
   transform: translate(-50%, -50%);
   background: white;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#popup-delete p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  color: #1e3a8a;
+
+}
+
+#popup-delete .buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
 }
 
 #popupForm {
@@ -371,7 +392,7 @@ input[type="color"] {
 
   #grid {
     padding: 10px;
-    width: 200px;
+    width: 240px;
     background-color: #f7f7f7;
     display: grid;
     grid-template-columns: repeat(21, 1fr);

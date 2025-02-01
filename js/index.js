@@ -148,6 +148,11 @@ deleteConfirmationButton.addEventListener("click", () => {
   handleHidePopupDeleteProject();
 });
 
+const deleteCancelButton = document.getElementById("delete-cancel");
+deleteCancelButton.addEventListener("click", () => {
+  handleHidePopupDeleteProject();
+})
+
 historyProject.addEventListener("click", (e) => {
   const element = e.target;
   if (element.classList.contains("delete-btn")) {

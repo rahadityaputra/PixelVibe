@@ -21,7 +21,6 @@ class ColorPalette {
     this.palettePopup.classList.add("palette-popup");
     this.#container.appendChild(this.palettePopup);
 
-    // Membuat input color
     const label = document.createElement("label");
     label.innerText = "Choice Color:";
     this.palettePopup.appendChild(label);
@@ -29,10 +28,9 @@ class ColorPalette {
     this.colorInput = document.createElement("input");
     this.colorInput.type = "color";
     this.colorInput.id = "input-color";
-    this.colorInput.value = "#000000"; // Warna default
+    this.colorInput.value = "#000000";
     this.palettePopup.appendChild(this.colorInput);
 
-    // Membuat elemen palet warna awal
     this.palette = document.createElement("div");
     this.palette.classList.add("palette");
 
@@ -57,10 +55,7 @@ class ColorPalette {
     this.palettePopup.appendChild(this.choiceColorButton);
 
     this.choiceColorButton.addEventListener("click", () => {
-      console.log(this.selectColor);
       this.colorInput.value = this.selectColor;
-      console.log(this.colorInput.value);
-
       this.addColor(this.selectColor);
       this.setCurrentColor(this.selectColor);
       this.#actionClickChooseColorButton(this.#currentColor);
@@ -93,7 +88,6 @@ class ColorPalette {
 
     this.#colors.push(newColor);
     this.addColorDiv(newColor);
-    console.log(this.#colors);
   };
 
   getColors = () => {
@@ -101,7 +95,6 @@ class ColorPalette {
   };
 
   getContrastColor = (hex) => {
-    // Konversi HEX ke RGB
     hex = hex.replace(/^#/, "");
     let r = parseInt(hex.substring(0, 2), 16);
     let g = parseInt(hex.substring(2, 4), 16);

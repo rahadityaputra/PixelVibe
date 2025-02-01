@@ -102,8 +102,6 @@ class LocalStorage {
   };
 
   deleteProject = (projectId) => {
-    console.log("p");
-
     const projects = this.getAllProjects();
     let deletedIndex;
 

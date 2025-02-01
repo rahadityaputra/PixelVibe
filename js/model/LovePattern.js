@@ -63,7 +63,6 @@ class LovePattern {
     });
   };
 
-  // ini masih salah
   start = async () => {
     this.draw();
     setInterval(() => {

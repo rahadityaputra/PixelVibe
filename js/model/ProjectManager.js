@@ -34,7 +34,6 @@ class ProjectManager {
 
   downloadCurrentProject = (contentCanvas) => {
     const dataURL = this.createURL(contentCanvas);
-    // Buat elemen <a> untuk download
     const link = document.createElement("a");
     link.href = dataURL;
     link.download = this.#currentProject.title + ".png";

@@ -10,18 +10,15 @@ class HistoryManager {
 
   redo = () => {
     if (this.#indexCurrentHistory == this.historyStack.length - 1) {
-      throw new Error("Can not Redo");
-      // return;
+      return;
     }
 
-    console.log(this.historyStack);
     this.#indexCurrentHistory++;
   };
 
   undo = () => {
     if (this.#indexCurrentHistory == 0) {
-      throw new Error("Can not Undo");
-      // return;
+      return;
     }
 
     this.#indexCurrentHistory = this.#indexCurrentHistory - 1;
@@ -50,7 +47,6 @@ class HistoryManager {
     if (this.#indexCurrentHistory == historyStackCopy.length - 1) {
       historyStackCopy.push([...coloredPoint]);
     } else {
-      console.log("p");
       historyStackCopy.splice(
         this.#indexCurrentHistory + 1,
         historyStackCopy.length - 1 - this.#indexCurrentHistory

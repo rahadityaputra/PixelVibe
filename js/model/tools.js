@@ -3,7 +3,6 @@ const tools = [
     name: "Color Palette",
     icon: "palette-line",
     action: () => {
-      console.log("ppp");
     },
   },
   {

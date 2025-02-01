@@ -120,10 +120,8 @@ class Canvas {
   };
 
   activeEraseMode = () => {
-    console.log("haha");
     this.#ErasingModeActived = true;
     this.#DrawingModeActived = false;
-    this.#actionListener("erasing");
   };
 
   setActionListener = (callback) => {
@@ -140,8 +138,6 @@ class Canvas {
   };
 
   render = (coloredPoints) => {
-    // console.log(coloredPoints);
-
     this.#coloredPoints = coloredPoints;
     if (coloredPoints.length != 0) {
       for (let i = 0; i < coloredPoints.length; i++) {
@@ -167,7 +163,6 @@ class Canvas {
   };
 
   erase = (cursor) => {
-    console.log("erase ");
     const rect = this.#contentCanvasElement.getBoundingClientRect();
     const x =
       Math.floor((cursor.clientX - rect.left) / this.#pixelSize) *
@@ -179,8 +174,6 @@ class Canvas {
   };
 
   clear = () => {
-    console.log("clear bro");
-
     this.#contentCtx.clear();
   };
 
@@ -188,9 +181,6 @@ class Canvas {
     return this.#contentCanvasElement;
   };
 
-  // getColoredPaints = () => {
-  //   return this.#coloredPoints;
-  // };
 }
 
 export default Canvas;

@@ -2,7 +2,6 @@ import Canvas from "./model/Canvas.js";
 import ColorPalette from "./model/ColorPalette.js";
 import ProjectManager from "./model/ProjectManager.js";
 import ToolBar from "./model/ToolBar.js";
-import tools from "./model/tools.js";
 
 const getIdFromQuery = () => {
   const queryString = window.location.search;
@@ -24,6 +23,11 @@ const showSuccessSaveAlert = () => {
     successSaveAlert.classList.remove("show");
   }, 1500);
 };
+
+const setTitleProject = (title) => {
+  const titleHeader = document.querySelector("header h1");
+  titleHeader.textContent = title;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const projectId = getIdFromQuery();
@@ -108,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     },
   ];
+  setTitleProject(currentProject.title);
   const toolbar = new ToolBar("toolbar", tools, "toolbar");
   toolbar.render();
   toolbar.setToolColor("Color Palette", "#000000");

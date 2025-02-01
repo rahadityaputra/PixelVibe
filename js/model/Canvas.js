@@ -66,19 +66,19 @@ class Canvas {
       e.preventDefault();
       this.#isDragging = true;
       if (this.#ErasingModeActived) {
-        this.erase(e.changedTouches[0]);
+        this.erase(e.changedTouches[0], 0.7);
         return;
       }
-      this.draw(e.changedTouches[0]);
+      this.draw(e.changedTouches[0], 0.7);
     });
 
     this.#contentCanvasElement.addEventListener("touchmove", (e) => {
       if (this.#isDragging) {
         if (this.#ErasingModeActived) {
-          this.erase(e.changedTouches[0]);
+          this.erase(e.changedTouches[0], 0.7);
           return;
         }
-        this.draw(e.changedTouches[0]);
+        this.draw(e.changedTouches[0], 0.7);
       }
     });
 
@@ -86,9 +86,9 @@ class Canvas {
       if (this.#isDragging) {
         this.#isDragging = false;
         if (this.#ErasingModeActived) {
-          this.erase(e.changedTouches[0]);
+          this.erase(e.changedTouches[0], 0.7);
         } else {
-          this.draw(e.changedTouches[0]);
+          this.draw(e.changedTouches[0], 0.7);
         }
 
         this.#onDragEnd(this.#coloredPoints);
@@ -149,26 +149,26 @@ class Canvas {
     }
   };
 
-  draw = (cursor) => {
+  draw = (cursor, scale = 1) => {
     const rect = this.#contentCanvasElement.getBoundingClientRect();
     const x =
-      Math.floor((cursor.clientX - rect.left) / this.#pixelSize) *
+      Math.floor((cursor.clientX - rect.left) / scale / this.#pixelSize) *
       this.#pixelSize;
     const y =
-      Math.floor((cursor.clientY - rect.top) / this.#pixelSize) *
+      Math.floor((cursor.clientY - rect.top) / scale / this.#pixelSize) *
       this.#pixelSize;
 
     this.#coloredPoints.push({ x, y, color: this.#drawColor });
     this.#contentCtx.draw(x, y, this.#drawColor, this.#pixelSize);
   };
 
-  erase = (cursor) => {
+  erase = (cursor, scale = 1) => {
     const rect = this.#contentCanvasElement.getBoundingClientRect();
     const x =
-      Math.floor((cursor.clientX - rect.left) / this.#pixelSize) *
+      Math.floor((cursor.clientX - rect.left) / scale / this.#pixelSize) *
       this.#pixelSize;
     const y =
-      Math.floor((cursor.clientY - rect.top) / this.#pixelSize) *
+      Math.floor((cursor.clientY - rect.top) / scale / this.#pixelSize) *
       this.#pixelSize;
     this.#contentCtx.erase(x, y, this.#pixelSize);
   };
@@ -180,7 +180,6 @@ class Canvas {
   getContentCanvas = () => {
     return this.#contentCanvasElement;
   };
-
 }
 
 export default Canvas;

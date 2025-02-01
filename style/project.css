@@ -14,16 +14,16 @@ body {
 
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 header {
   text-align: center;
-  margin-bottom: 20px;
-  position: fixed;
   background: white;
   width: 100%;
-  padding: 10px;
+  /* height: 70px; */
   z-index: 100;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.08);
 }
@@ -145,9 +145,9 @@ canvas {
 }
 
 #pixel-canvas-wrapper {
+  margin-top: 30px;
   width: 900px;
-  margin-top: 100px;
-  height: 600px;
+  height: 900px;
   overflow: auto;
   position: relative;
   display: flex;
@@ -210,36 +210,53 @@ input[type="color"] {
   opacity: 1;
 }
 @media screen and (max-width: 800px) {
-  #toolbar-wrapper {
-    position: fixed; 
-    z-index: 999999;
+
+  header {
+    text-align: center;
+    background: white;
     width: 100%;
-    bottom: 10px; 
-    left: 0; 
-    padding: 10px 0;
-    top: calc(100vh - 100px);
+    z-index: 100;
+    padding: 20px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.08);
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  p {
+    color: #777;
+  }
+
+  #toolbar-wrapper {
+    position: fixed;
+    z-index: 999999;
     display: flex;
-    justify-content: center;
+    top: 90px;
+    height: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   #toolbar {
+    margin-top: 20px;
     min-width: 400px;
     max-width: 600px;
-    background-color: #fff;
-    padding: 5px;
-    padding-bottom: 10px;
-    border-radius: 8px;
+    height: 60px;
     display: flex;
-    flex-direction: row;
-    gap: 5px;
-    justify-content: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 1px;
+    justify-content: space-evenly;
     align-items: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 12px 24px rgba(0, 0, 0, 0.08);
   }
 
   .tool {
-    width: 40px;
-    height: 40px;
+    width: 37px;
+    height: 37px;
     display: flex;
     background-color: white;
     background-repeat: no-repeat;
@@ -252,7 +269,30 @@ input[type="color"] {
     cursor: pointer;
   }
 
+  #pixel-canvas-wrapper {
+    margin-top: 30px;
+    width: 330px;
+    height: 900px;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
   canvas {
-    transform: scale(.7);
+    transform: scale(0.7);
+  }
+
+  .palette-popup {
+    position: fixed;
+    top: 280px;
+    left: 100px;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
   }
 }

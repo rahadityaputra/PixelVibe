@@ -12,7 +12,7 @@ const getIdFromQuery = () => {
 
 const showProjectCreatedAt = (createdAt) => {
   const createdAtHeader = document.getElementById("created-at");
-  createdAtHeader.textContent = `Project created on: ${createdAt}`;
+  createdAtHeader.textContent =  createdAt;
 };
 
 const showSuccessSaveAlert = () => {

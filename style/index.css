@@ -114,8 +114,7 @@ body {
 
 .project-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-columns: repeat(1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   justify-content: center;
   padding: 20px;
@@ -141,6 +140,7 @@ body {
 .project-details {
   padding: 15px;
   text-align: left;
+  flex-grow: 1;
 }
 
 .project-details h3 {
@@ -151,6 +151,12 @@ body {
   margin: 5px 0;
   font-size: 14px;
   color: #666;
+}
+.project-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-info .snapshot {
@@ -188,13 +194,15 @@ body {
   display: flex;
   text-decoration: none;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   color: #1e3a8a;
+  width: 30%;
 }
 
 .project-item .buttons .btn span {
@@ -379,5 +387,10 @@ input[type="color"] {
 
   .project-list {
     grid-template-columns: 1fr;
+  }
+
+  .project-item .buttons .btn span {
+    width: 20px;
+    height: 20px;
   }
 }

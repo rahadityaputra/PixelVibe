@@ -32,6 +32,8 @@ class Tool {
   };
 
   setColor = (color) => {
+    console.log(color);
+    
     this.button.style.backgroundColor = color;
     const img = this.button.querySelector("img");
     if (this.isSetWhiteColor(color)) {

@@ -122,6 +122,7 @@ class Canvas {
   activeEraseMode = () => {
     this.#ErasingModeActived = true;
     this.#DrawingModeActived = false;
+    this.#actionListener("erasing");
   };
 
   setActionListener = (callback) => {

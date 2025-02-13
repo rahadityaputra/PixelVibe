@@ -18,7 +18,7 @@ Pixel Vibe adalah aplikasi untuk membuat gambar pixel art dengan berbagai fitur 
 ## Instalasi
 1. Clone repositori ini:
    ```sh
-   git clone https://github.com/username/pixel-vibe.git
+   git clone https://github.com/rahadityaputra/pixel-vibe.git
    ```
 2. Masuk ke direktori proyek:
    ```sh
